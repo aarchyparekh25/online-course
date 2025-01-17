@@ -38,12 +38,12 @@ const AuthPage: React.FC = () => {
 
       if (isSignUp) {
         setTimeout(() => {
-          setIsSignUp(false); // Switch to login page after successful registration
+          setIsSignUp(false);
         }, 1000);
       } else {
         // Redirect to the landing page after successful login
         setTimeout(() => {
-          router.push('/'); // Replace '/landing' with your landing page route
+          router.push('/');
         }, 1000);
       }
     } catch (error: any) {
@@ -52,9 +52,9 @@ const AuthPage: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center mb-6">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-6">
           {isSignUp ? 'Sign Up' : 'Login'}
         </h2>
 
@@ -112,7 +112,7 @@ const AuthPage: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full p-3 bg-[#39229A] text-white rounded-md hover:bg-blue-700"
+            className="w-full p-3 bg-[#39229A] text-white rounded-md hover:bg-blue-700 transition-colors"
           >
             {isSignUp ? 'Sign Up' : 'Login'}
           </button>

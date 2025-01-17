@@ -1,23 +1,23 @@
 import React from 'react';
-import { FaFacebookF,FaTwitter,FaInstagram, } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
+
 const Footer: React.FC = () => {
   return (
-    <footer className="p-6 bg-[#F7E3AF] text-center text-[#333333]">
+    <footer className="p-3 bg-black text-center text-white text-sm">
       <p>&copy; 2025 Learnify. All rights reserved.</p>
-      <p className="mb-4 font-semibold text-lg">Find us on</p>
+      <p className="mb-2 font-semibold">Find us on</p>
 
-      <div className="flex justify-center space-x-4 mb-4">
-  <div className="p-2 rounded-full hover:bg-[#5A47AB]">
-    <FaFacebookF size={20} className="text-[#333333]" />
-  </div>
-  <div className="p-2 rounded-full hover:bg-[#5A47AB]">
-    <FaTwitter size={20} className="text-[#333333]" />
-  </div>
-  <div className="p-2 rounded-full hover:bg-[#5A47AB]">
-    <FaInstagram size={20} className="text-[#333333]" />
-  </div>
-</div>
-
+      <div className="flex justify-center space-x-3 mb-2">
+        <div className="p-1 rounded-full hover:bg-[#5A47AB]">
+          <FaFacebookF size={16} className="text-white" />
+        </div>
+        <div className="p-1 rounded-full hover:bg-[#5A47AB]">
+          <FaTwitter size={16} className="text-white" />
+        </div>
+        <div className="p-1 rounded-full hover:bg-[#5A47AB]">
+          <FaInstagram size={16} className="text-white" />
+        </div>
+      </div>
     </footer>
   );
 };
