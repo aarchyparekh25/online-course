@@ -9,9 +9,9 @@ router.get("/gettest", testimonialController.getTestimonials);
 router.post("/addtest", testimonialController.addTestimonial);
 
 // Edit a testimonial
-router.put("/puttest/:tid", testimonialController.editTestimonial);
+router.put("/edit/:tid", testimonialController.editTestimonial);
 
 // Delete a testimonial
-router.delete("/deletetest/:tid", testimonialController.deleteTestimonial);
+router.delete("/delete/:tid", testimonialController.deleteTestimonial);
 
 module.exports = router;

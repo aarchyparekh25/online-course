@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const TestimonialSchema = new mongoose.Schema(
   {
     tid: {
-      type: Number,
+      type: String,
       required: true,
       unique: true, // Ensure tid is unique
       index: true,  // Make tid indexed for better search performance
@@ -18,6 +18,7 @@ const TestimonialSchema = new mongoose.Schema(
     },
     image: {
       type: String,
+      required: true, // Ensure image URL is always provided
       default: "/default-image.webp", // Optional default image
     },
   },

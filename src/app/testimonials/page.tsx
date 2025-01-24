@@ -123,7 +123,7 @@ const Testimonials: React.FC = () => {
     if (!updatedMessage) return;
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/testimonials/puttest/${testimonial.tid}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/testimonials/edit/${testimonial.tid}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

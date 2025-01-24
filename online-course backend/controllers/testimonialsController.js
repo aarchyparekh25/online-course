@@ -12,25 +12,23 @@ const getTestimonials = async (req, res) => {
 
 // Add a new testimonial
 const addTestimonial = async (req, res) => {
-  const { tid, name, message, image } = req.body;
+  let { tid, name, message, image } = req.body;
 
   if (!name || !message) {
     return res.status(400).json({ error: "Name and message are required" });
   }
 
-  try {
-    // Check if testimonial with this tid already exists
-    const existingTestimonial = await Testimonial.findOne({ tid });
-    if (existingTestimonial) {
-      return res.status(400).json({ error: "Testimonial with this ID already exists" });
+  // Convert Google Drive link to direct link format
+  if (image?.includes("drive.google.com")) {
+    const fileIdMatch = image.match(/file\/d\/(.+?)\//);
+    if (fileIdMatch) {
+      const fileId = fileIdMatch[1];
+      image = `https://drive.google.com/uc?export=view&id=${fileId}`;
     }
+  }
 
-    const newTestimonial = new Testimonial({ 
-      tid, 
-      name, 
-      message, 
-      image: image || "/default-image.webp" 
-    });
+  try {
+    const newTestimonial = new Testimonial({ tid, name, message, image });
     await newTestimonial.save();
     res.status(201).json(newTestimonial);
   } catch (error) {
@@ -53,9 +51,11 @@ const editTestimonial = async (req, res) => {
       { name, message, image: image || "/default-image.webp" },
       { new: true } // Return the updated document
     );
+
     if (!updatedTestimonial) {
       return res.status(404).json({ error: "Testimonial not found" });
     }
+
     res.json(updatedTestimonial);
   } catch (error) {
     res.status(500).json({ error: "Failed to update testimonial" });
@@ -71,6 +71,7 @@ const deleteTestimonial = async (req, res) => {
     if (!deletedTestimonial) {
       return res.status(404).json({ error: "Testimonial not found" });
     }
+
     res.status(200).json({ message: "Testimonial deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Failed to delete testimonial" });
