@@ -1,0 +1,110 @@
+[
+  {
+      "id": 1,
+      "name": "Arjun Sharma",
+      "role": "Project Manager",
+      "image": "/mentor1.jpeg",
+      "rating": 4.8,
+      "reviews": "44k reviews",
+      "category": "Project Management"
+  },
+  {
+      "id": 2,
+      "name": "Ananya Iyer",
+      "role": "Project Manager",
+      "image": "/mentor2.jpg",
+      "rating": 4.8,
+      "reviews": "44k reviews",
+      "category": "Project Management"
+  },
+  {
+      "id": 3,
+      "name": "Rohan Gupta",
+      "role": "UI/UX Designer",
+      "image": "/mentor3.jpeg",
+      "rating": 4.8,
+      "reviews": "44k reviews",
+      "category": "UI/UX Design"
+  },
+  {
+      "id": 4,
+      "name": "Sanya Kapoor",
+      "role": "UI/UX Designer",
+      "image": "/mentor4.jpg",
+      "rating": 4.8,
+      "reviews": "44k reviews",
+      "category": "UI/UX Design"
+  },
+  {
+      "id": 5,
+      "name": "Rajesh Verma",
+      "role": "Data Scientist",
+      "image": "/mentor5.jpeg",
+      "rating": 4.7,
+      "reviews": "25k reviews",
+      "category": "Data Science"
+  },
+  {
+      "id": 6,
+      "name": "Neha Singh",
+      "role": "Data Scientist",
+      "image": "/mentor6.jpg",
+      "rating": 4.9,
+      "reviews": "18k reviews",
+      "category": "Data Science"
+  },
+  {
+      "id": 7,
+      "name": "Ishita Patel",
+      "role": "Frontend Developer",
+      "image": "/mentor7.jpg",
+      "rating": 4.8,
+      "reviews": "30k reviews",
+      "category": "Front-End Development"
+  },
+  {
+      "id": 8,
+      "name": "Aditya Nair",
+      "role": "Frontend Developer",
+      "image": "/mentor8.jpeg",
+      "rating": 4.7,
+      "reviews": "22k reviews",
+      "category": "Front-End Development"
+  },
+  {
+      "id": 9,
+      "name": "Meera Menon",
+      "role": "Data Analyst",
+      "image": "/mentor9.jpg",
+      "rating": 4.8,
+      "reviews": "40k reviews",
+      "category": "Data Analysis"
+  },
+  {
+      "id": 10,
+      "name": "Amit Joshi",
+      "role": "Data Analyst",
+      "image": "/mentor10.jpeg",
+      "rating": 4.9,
+      "reviews": "50k reviews",
+      "category": "Data Analysis"
+  },
+  {
+      "id": 11,
+      "name": "Karan Desai",
+      "role": "Digital Marketer",
+      "image": "/mentor11.jpeg",
+      "rating": 4.8,
+      "reviews": "35k reviews",
+      "category": "Digital Marketing"
+  },
+  {
+      "id": 12,
+      "name": "Pooja Reddy",
+      "role": "Digital Marketer",
+      "image": "/mentor12.jpg",
+      "rating": 4.7,
+      "reviews": "20k reviews",
+      "category": "Digital Marketing"
+  }
+]

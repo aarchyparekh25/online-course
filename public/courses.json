@@ -1,0 +1,123 @@
+[
+    {
+      "id": 1,
+      "title": "Project Management Fundamentals",
+      "instructor": "Arjun Sharma",
+      "image": "/project1.png",
+      "rating": 4.7,
+      "reviews": "25K reviews",
+      "category": "Project Management",
+      "details": "Learn the essentials of project management, including planning, scheduling, and execution strategies."
+    },
+    {
+      "id": 2,
+      "title": "Advanced Agile Techniques",
+      "instructor": "Ananya Iyer",
+      "image": "/project2.webp",
+      "rating": 4.9,
+      "reviews": "18K reviews",
+      "category": "Project Management",
+      "details": "Master advanced Agile methodologies to improve team collaboration and project outcomes."
+    },
+    {
+      "id": 3,
+      "title": "UI/UX Design Bootcamp",
+      "instructor": "Rohan Gupta",
+      "image": "/ux1.png",
+      "rating": 4.8,
+      "reviews": "30K reviews",
+      "category": "UI/UX Design",
+      "details": "A comprehensive bootcamp covering user research, wireframing, and prototyping for design excellence."
+    },
+    {
+      "id": 4,
+      "title": "Design Systems in UX",
+      "instructor": "Sanaya Kapoor",
+      "image": "/ux3.webp",
+      "rating": 4.7,
+      "reviews": "22K reviews",
+      "category": "UI/UX Design",
+      "details": "Learn how to create and maintain scalable design systems for consistent user experiences."
+    },
+    {
+      "id": 5,
+      "title": "Python for Data Science",
+      "instructor": "Rajesh Verma",
+      "image": "/data1.jpg",
+      "rating": 4.8,
+      "reviews": "40K reviews",
+      "category": "Data Science",
+      "details": "Master Python programming for data analysis, visualization, and machine learning."
+    },
+    {
+      "id": 6,
+      "title": "Deep Learning Specialization",
+      "instructor": "Neha Singh",
+      "image": "/data2.webp",
+      "rating": 4.9,
+      "reviews": "50K reviews",
+      "category": "Data Science",
+      "details": "Dive deep into neural networks and build cutting-edge AI models."
+    },
+    {
+      "id": 7,
+      "title": "React for Beginners",
+      "instructor": "Ishita Patel",
+      "image": "/frontend1.webp",
+      "rating": 4.8,
+      "reviews": "35K reviews",
+      "category": "Front-End Development",
+      "details": "Learn the basics of React to create dynamic and interactive web applications."
+    },
+    {
+      "id": 8,
+      "title": "Advanced CSS Techniques",
+      "instructor": "Aditya Nair",
+      "image": "/frontend2.jpg",
+      "rating": 4.7,
+      "reviews": "20K reviews",
+      "category": "Front-End Development",
+      "details": "Enhance your web designs with advanced CSS layouts, animations, and responsiveness."
+    },
+    {
+      "id": 9,
+      "title": "Data Visualization Mastery",
+      "instructor": "Meera Menon",
+      "image": "/dataanalysts1.jpg",
+      "rating": 4.8,
+      "reviews": "28K reviews",
+      "category": "Data Analysis",
+      "details": "Learn how to create compelling data visualizations and dashboards using modern tools like Tableau and Power BI."
+    },
+    {
+      "id": 10,
+      "title": "Excel for Data Analysis",
+      "instructor": "Amit Joshi",
+      "image": "/dataanalysts2.webp",
+      "rating": 4.7,
+      "reviews": "15K reviews",
+      "category": "Data Analysis",
+      "details": "Master the advanced features of Excel to analyze and summarize data efficiently."
+    },
+    {
+      "id": 11,
+      "title": "Digital Marketing Fundamentals",
+      "instructor": "Karan Desai",
+      "image": "/digitalmarketing1.jpeg",
+      "rating": 4.6,
+      "reviews": "18K reviews",
+      "category": "Digital Marketing",
+      "details": "Discover the basics of digital marketing, including SEO, PPC, social media, and email campaigns."
+    },
+    {
+      "id": 12,
+      "title": "Social Media Marketing Strategy",
+      "instructor": "Pooja Reddy",
+      "image": "/digitalmarketing2.webp",
+      "rating": 4.8,
+      "reviews": "22K reviews",
+      "category": "Digital Marketing",
+      "details": "Develop effective social media strategies to grow your brand and engage your audience."
+    }
+  ]
+  

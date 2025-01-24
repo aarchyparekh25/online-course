@@ -12,11 +12,37 @@ const AuthPage: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const router = useRouter();
 
+  const validateInputs = () => {
+    if (!email) {
+      setErrorMessage('Email is required.');
+      console.log('Validation Error: Missing email.');
+      return false;
+    }
+    if (!password) {
+      setErrorMessage('Password is required.');
+      console.log('Validation Error: Missing password.');
+      return false;
+    }
+    if (isSignUp && !username) {
+      setErrorMessage('Username is required for registration.');
+      console.log('Validation Error: Missing username.');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateInputs()) return;
+
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/${isSignUp ? 'register' : 'login'}`;
 
     try {
+      // Clear previous messages
+      setErrorMessage('');
+      setSuccessMessage('');
+
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -31,22 +57,24 @@ const AuthPage: React.FC = () => {
 
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong!');
+        console.error('API Error:', data.message || 'An error occurred.');
+        throw new Error(data.message || (isSignUp ? 'Registration failed' : 'Invalid credentials'));
       }
 
-      setSuccessMessage(data.message); // Set success message
+      setSuccessMessage(data.message || (isSignUp ? 'Registration successful!' : 'Login successful!'));
+      console.log('API Success:', data);
 
       if (isSignUp) {
         setTimeout(() => {
           setIsSignUp(false);
         }, 1000);
       } else {
-        // Redirect to the landing page after successful login
         setTimeout(() => {
           router.push('/');
         }, 1000);
       }
     } catch (error: any) {
+      console.error('Error:', error.message);
       setErrorMessage(error.message);
     }
   };
