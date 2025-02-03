@@ -2,6 +2,8 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Testimonial {
   tid: string;
@@ -12,29 +14,23 @@ interface Testimonial {
 
 const Testimonials: React.FC = () => {
   const marqueeRef = useRef<HTMLDivElement>(null);
-  const [newTestimonial, setNewTestimonial] = useState<Testimonial>({ 
-    tid: '',
-    name: "", 
-    message: "", 
-    image: "/default-image.webp" 
-  });
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
-  // Fetch testimonials on component mount
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/testimonials/gettest`);
         if (!response.ok) {
-          throw new Error('Failed to fetch testimonials');
+          throw new Error("Failed to fetch testimonials");
         }
         const data = await response.json();
         setTestimonials(data);
         setLoading(false);
       } catch (err) {
-        setError('Error fetching testimonials');
+        setError("Error fetching testimonials");
         setLoading(false);
         console.error(err);
       }
@@ -61,47 +57,9 @@ const Testimonials: React.FC = () => {
     }
   };
 
-  // Handle new testimonial submission
-  const handleSubmitTestimonial = async () => {
-    if (!newTestimonial.name || !newTestimonial.message) {
-      alert("Please fill out all fields.");
-      return;
-    }
-
-    try {
-      // Generate a unique tid (you might want to handle this on the backend)
-      const tid = Date.now().toString();
-      
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/testimonials/addtest`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...newTestimonial,
-          tid: tid
-        }),
-      });
-
-      if (response.ok) {
-        const savedTestimonial = await response.json();
-        setTestimonials([...testimonials, savedTestimonial]);
-        setNewTestimonial({ tid: '', name: "", message: "", image: "/default-image.webp" });
-        alert("Testimonial added successfully!");
-      } else {
-        const errorData = await response.json();
-        alert(errorData.error || "Failed to add testimonial.");
-      }
-    } catch (error) {
-      console.error("Error adding testimonial:", error);
-      alert("Failed to add testimonial.");
-    }
-  };
-
-  // Handle delete testimonial
   const handleDeleteTestimonial = async (tid: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/testimonials/deletetest/${tid}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/testimonials/delete/${tid}`, {
         method: "DELETE",
       });
 
@@ -116,58 +74,29 @@ const Testimonials: React.FC = () => {
     }
   };
 
-  // Handle edit testimonial
-  const handleEditTestimonial = async (testimonial: Testimonial) => {
-    const updatedMessage = prompt("Edit your testimonial message:", testimonial.message);
-
-    if (!updatedMessage) return;
-
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/testimonials/edit/${testimonial.tid}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ 
-          ...testimonial, 
-          message: updatedMessage 
-        }),
-      });
-
-      if (response.ok) {
-        const updatedTest = await response.json();
-        setTestimonials(
-          testimonials.map((t) =>
-            t.tid === testimonial.tid ? updatedTest : t
-          )
-        );
-        alert("Testimonial updated successfully!");
-      } else {
-        alert("Failed to update testimonial.");
-      }
-    } catch (error) {
-      console.error("Error updating testimonial:", error);
-    }
+  const handleEditTestimonial = (tid: string) => {
+    router.push(`/testimonials/edit-testimonial?tid=${tid}`);
   };
 
   if (loading) return <div>Loading testimonials...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <section id="testimonials" className="p-6 md:p-12">
+    <section id="testimonials" className="p-6 md:p-12 max-w-full overflow-hidden">
       <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
         Hear From our Learners
       </h2>
       <div
-        className="overflow-hidden relative w-full"
+        className="relative w-full "
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div ref={marqueeRef} className="flex gap-6 animate-loopRight">
+        <div ref={marqueeRef} className="flex gap-6 animate-loopRight w-full">
           {extendedTestimonials.map((testimonial) => (
             <div
               key={testimonial.key}
-              className="p-6 bg-white shadow-md shadow-gray-500 rounded-xl flex-shrink-0 w-72 transition-transform duration-300 hover:scale-105"
+              data-testid={`testimonial-${testimonial.tid}`}
+              className="p-6 bg-white shadow-md shadow-gray-500 rounded-xl flex-shrink-0 w-full sm:w-72 transition-transform duration-300 hover:scale-105"
             >
               <div className="flex items-center gap-4">
                 <Image
@@ -182,7 +111,7 @@ const Testimonials: React.FC = () => {
               <p className="mt-4 text-gray-600">{testimonial.message}</p>
               <div className="flex justify-end gap-2 mt-4">
                 <button
-                  onClick={() => handleEditTestimonial(testimonial)}
+                  onClick={() => handleEditTestimonial(testimonial.tid)}
                   className="text-blue-500 hover:underline"
                 >
                   Edit
@@ -198,32 +127,12 @@ const Testimonials: React.FC = () => {
           ))}
         </div>
       </div>
-
-      {/* New Testimonial Form */}
-      <div className="mt-8">
-        <h3 className="text-xl font-bold">Add Your Testimonial</h3>
-        <div className="mt-4">
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="border rounded-md p-2 w-full mb-2"
-            value={newTestimonial.name}
-            onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
-          />
-          <textarea
-            placeholder="Your Message"
-            className="border rounded-md p-2 w-full mb-2"
-            rows={4}
-            value={newTestimonial.message}
-            onChange={(e) => setNewTestimonial({ ...newTestimonial, message: e.target.value })}
-          ></textarea>
-          <button
-            onClick={handleSubmitTestimonial}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-          >
-            Submit Testimonial
+      <div className="mt-8 text-center">
+        <Link href="/testimonials/add-testimonial">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+            Add Your Testimonial
           </button>
-        </div>
+        </Link>
       </div>
     </section>
   );

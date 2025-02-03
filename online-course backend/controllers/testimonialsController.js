@@ -18,7 +18,7 @@ const addTestimonial = async (req, res) => {
     return res.status(400).json({ error: "Name and message are required" });
   }
 
-  // Convert Google Drive link to direct link format
+  // Convert Google Drive link to direct link format if provided
   if (image?.includes("drive.google.com")) {
     const fileIdMatch = image.match(/file\/d\/(.+?)\//);
     if (fileIdMatch) {
