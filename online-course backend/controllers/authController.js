@@ -1,7 +1,7 @@
 // authController.js (Express Backend)
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User"); // Make sure the path is correct
+const User = require("../models/User");
 
 exports.registerUser = async (req, res) => {
     const { username, email, password } = req.body;
@@ -52,6 +52,7 @@ exports.logoutUser = async (req, res) => {
     res.status(200).json({ message: "Logged out successfully" });
 };
 
+// New function to get current user data
 exports.getCurrentUser = async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -63,7 +64,7 @@ exports.getCurrentUser = async (req, res) => {
         const token = authHeader.split(' ')[1];
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded.id).select("-password");
+        const user = await User.findById(decoded.id).select("-password");  // Exclude password field
 
         if (!user) { // Check if the user exists
             return res.status(404).json({ message: "User not found" });

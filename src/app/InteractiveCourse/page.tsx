@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useCookies } from "react-cookie"; // Import react-cookie
 
 interface Course {
   id: number;
@@ -15,11 +17,20 @@ interface Course {
 }
 
 const Course: React.FC = () => {
+  const [cookies] = useCookies(["token"]); // Check for JWT token in cookies
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showAll, setShowAll] = useState(false);
+
+  // If there's no token, redirect to the login page
+  useEffect(() => {
+    if (!cookies.token) {
+      router.push("/auth"); // Redirect to login if not authenticated
+    }
+  }, [cookies.token, router]);
 
   useEffect(() => {
     // Fetch data from the JSON file
@@ -156,40 +167,38 @@ const Course: React.FC = () => {
 
       {/* Modal for Course Details */}
       {selectedCourse && (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-y-auto">
-      <div className="bg-white rounded-xl shadow-lg max-w-lg w-full relative">
-      {/* Close Button */}
-      <button
-        onClick={() => setSelectedCourse(null)}
-        className="absolute top-4 right-4 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 z-50"
-      >
-        ✕
-      </button>
-      {/* Image */}
-      <div className="w-full h-64 relative rounded-t-xl overflow-hidden">
-        <Image
-          src={selectedCourse.image}
-          alt={selectedCourse.title}
-          className="object-cover"
-          width={800} // Adjust as needed
-          height={400}
-        />
-      </div>
-      {/* Modal Content */}
-      <div className="p-4 overflow-y-auto max-h-[50vh]">
-        <h3 className="text-2xl font-bold text-gray-800">{selectedCourse.title}</h3>
-        <p className="text-sm text-gray-600 mb-2">{selectedCourse.instructor}</p>
-        <div className="flex items-center mb-4 text-yellow-500">
-          <span className="font-bold">{selectedCourse.rating}</span>
-          <span className="ml-2 text-gray-500">{selectedCourse.reviews}</span>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-y-auto">
+          <div className="bg-white rounded-xl shadow-lg max-w-lg w-full relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedCourse(null)}
+              className="absolute top-4 right-4 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 z-50"
+            >
+              ✕
+            </button>
+            {/* Image */}
+            <div className="w-full h-64 relative rounded-t-xl overflow-hidden">
+              <Image
+                src={selectedCourse.image}
+                alt={selectedCourse.title}
+                className="object-cover"
+                width={800} // Adjust as needed
+                height={400}
+              />
+            </div>
+            {/* Modal Content */}
+            <div className="p-4 overflow-y-auto max-h-[50vh]">
+              <h3 className="text-2xl font-bold text-gray-800">{selectedCourse.title}</h3>
+              <p className="text-sm text-gray-600 mb-2">{selectedCourse.instructor}</p>
+              <div className="flex items-center mb-4 text-yellow-500">
+                <span className="font-bold">{selectedCourse.rating}</span>
+                <span className="ml-2 text-gray-500">{selectedCourse.reviews}</span>
+              </div>
+              <p className="text-gray-700">{selectedCourse.details}</p>
+            </div>
+          </div>
         </div>
-        <p className="text-gray-700">{selectedCourse.details}</p>
-      </div>
-    </div>
-  </div>
-    )}
-
-
+      )}
     </div>
   );
 };

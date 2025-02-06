@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { getCookie } from 'react-cookie';
 
 interface Mentor {
   id: number;
@@ -18,8 +20,17 @@ const Mentors: React.FC = () => {
   const [filteredMentors, setFilteredMentors] = useState<Mentor[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [showAll, setShowAll] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
+    // Check if the user is authenticated
+    const token = getCookie('jwtToken'); // Assuming your JWT token is stored as 'jwtToken'
+    if (!token) {
+      // Redirect to login page if not authenticated
+      router.push('/auth');
+      return;
+    }
+
     // Fetch the mentors data from the JSON file
     fetch('/mentors.json')
       .then((response) => response.json())
@@ -27,7 +38,7 @@ const Mentors: React.FC = () => {
         setMentors(data);
         setFilteredMentors(data);
       });
-  }, []);
+  }, [router]);
 
   const handleFilterChange = (category: string) => {
     setSelectedCategory(category);

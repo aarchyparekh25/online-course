@@ -5,6 +5,7 @@ import { FaFacebookF, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { FiPhone } from 'react-icons/fi';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
+import Link from 'next/link'; // Import Next.js Link
 
 const Footer: React.FC = () => {
   return (
@@ -30,20 +31,21 @@ const Footer: React.FC = () => {
         {/* Navigation Links */}
         <div className="text-center md:text-left">
           <div className="mb-4">
+            <Link href="/">
             <h3 className="font-semibold mb-2">Home</h3>
+            </Link>
             <ul>
-              
-              <li>Features</li>
-              <li>Testimonials</li>
-              <li>FAQ</li>
+              <li><Link href="/#features">Features</Link></li>
+              <li><Link href="/#testimonials">Testimonials</Link></li>
+              <li><Link href="/#faq">FAQ</Link></li>
             </ul>
           </div>
           <div className="mb-4">
             <h3 className="font-semibold mb-2">About Us</h3>
             <ul>
-              <li>Company</li>
-            <li>Our Goals</li>
-            <li>Privacy policy</li>
+              <li><Link href="/company">Company</Link></li>
+              <li><Link href="/goals">Our Goals</Link></li>
+              <li><Link href="/privacy-policy">Privacy policy</Link></li>
             </ul>
           </div>
         </div>
@@ -66,7 +68,7 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="bg-black text-center py-3">
-        <p>&copy; 2023 Skillbridge. All rights reserved.</p>
+        <p>&copy; 2025 Learnify. All rights reserved.</p>
       </div>
     </footer>
   );

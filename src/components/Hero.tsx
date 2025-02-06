@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
 
   return (
     <section
-      className="relative w-[100%] h-[70vh] bg-cover bg-center mt-10 rounded-lg overflow-hidden"
+      className="relative w-[100%] h-[70vh] bg-cover bg-center mt-10 overflow-hidden rounded-3xl"
       style={{ backgroundImage: "url('banner3.png')" }}
     >
       {/* Gradient Overlay */}
